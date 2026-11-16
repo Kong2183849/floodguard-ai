@@ -1,0 +1,8 @@
+{
+  "name": "FloodGuard AI",
+  "description": "FloodGuard AI — AI-Powered Smart Flood Management & Decision Support System for Chatuchak District.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

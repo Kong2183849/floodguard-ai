@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --font-sans: "Plus Jakarta Sans", "Noto Sans Thai", ui-sans-serif, system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+    --ug-bg-main: #f4f7fb;
+    --ug-bg-card: #ffffff;
+    --ug-text-primary: #172033;
+    --ug-text-secondary: #64748b;
+    --ug-accent: #0891b2;
+    --ug-border: #e2e8f0;
+    --ug-scroll-track: #eef2f7;
+    --ug-scroll-thumb: #cbd5e1;
+    --ug-scroll-thumb-hover: #94a3b8;
+    --ug-slider-track: #cbd5e1;
+    --ug-slider-thumb: #0891b2;
+    --ug-slider-thumb-hover: #0e7490;
+    --ug-slider-thumb-border: #ffffff;
+  }
+
+  .dark {
+    --ug-bg-main: #060b14;
+    --ug-bg-card: #0b1220;
+    --ug-text-primary: #e2e8f0;
+    --ug-text-secondary: #94a3b8;
+    --ug-accent: #06b6d4;
+    --ug-border: #1e293b;
+    --ug-scroll-track: #080f1c;
+    --ug-scroll-thumb: #1e293b;
+    --ug-scroll-thumb-hover: #334155;
+    --ug-slider-track: #1e293b;
+    --ug-slider-thumb: #06b6d4;
+    --ug-slider-thumb-hover: #22d3ee;
+    --ug-slider-thumb-border: #0b1220;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+    font-family: var(--font-sans);
+    background-color: var(--ug-bg-main);
+    color: var(--ug-text-primary);
+  }
+}
+
+.font-mono-tabular {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Custom sleek theme-aware scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--ug-scroll-track);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--ug-scroll-thumb);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ug-scroll-thumb-hover);
+}
+
+/* Range slider styling for tactical simulation controls */
+input[type="range"].ug-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--ug-slider-track);
+  outline: none;
+}
+
+input[type="range"].ug-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 9999px;
+  background: var(--ug-slider-thumb);
+  border: 2px solid var(--ug-slider-thumb-border);
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+input[type="range"].ug-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  background: var(--ug-slider-thumb-hover);
+}
