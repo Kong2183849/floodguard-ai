@@ -34,6 +34,7 @@ import {
   generateStructuredFallbackAnalysis,
   type AssistantSimulationSnapshot,
 } from '../engine/assistantContext';
+import { isStandaloneRuntime } from '../engine/mcdaExplanation';
 import type {
   AffectedAreaOption,
   AffectedObjectRecord,
@@ -716,6 +717,11 @@ export function AiAssistantPanel() {
   }, [resetCount]);
 
   useEffect(() => {
+    if (isStandaloneRuntime()) {
+      setHealthMissingKey(true);
+      setModeStatus('fallback');
+      return;
+    }
     let cancelled = false;
     fetch('/api/health')
       .then((r) => (r.ok ? r.json() : null))
@@ -874,6 +880,26 @@ export function AiAssistantPanel() {
       'assistant.blockedShort'
     )}`;
 
+    if (isStandaloneRuntime()) {
+      const fallback = generateStructuredFallbackAnalysis(question, snapshot, language);
+      setModeStatus('fallback');
+      setQueryNoticeBanner(t('assistant.standaloneOfflineNotice'));
+      setTurns((prev) => [
+        ...prev,
+        {
+          id: `assistant-offline-${Date.now()}`,
+          role: 'assistant',
+          text: fallback.answer,
+          analysis: fallback.analysis,
+          mode: 'fallback',
+          model: 'rule-based-offline',
+          scenarioStamp: stamp,
+        },
+      ]);
+      setIsLoading(false);
+      return;
+    }
+
     try {
       const resp = await fetch('/api/assistant/query', {
         method: 'POST',
@@ -956,7 +982,12 @@ export function AiAssistantPanel() {
   };
 
   const displayedBanner =
-    queryNoticeBanner ?? (healthMissingKey ? t('assistant.healthNoKeyNotice') : null);
+    queryNoticeBanner ??
+    (healthMissingKey
+      ? isStandaloneRuntime()
+        ? t('assistant.standaloneOfflineNotice')
+        : t('assistant.healthNoKeyNotice')
+      : null);
 
   return (
     <div className="flex flex-col gap-3 h-full" data-testid="ai-problem-analyzer">

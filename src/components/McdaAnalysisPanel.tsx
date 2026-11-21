@@ -29,6 +29,10 @@ import {
 } from 'recharts';
 import { useSimulation } from '../context/SimulationContext';
 import { useTheme } from '../context/ThemeContext';
+import {
+  buildDeterministicMcdaExplanation,
+  isStandaloneRuntime,
+} from '../engine/mcdaExplanation';
 import { useTranslation } from '../i18n';
 import type {
   McdaCandidateSolution,
@@ -110,27 +114,35 @@ export function McdaAnalysisPanel() {
 
   const handleExplainWithGemini = async () => {
     setAiLoading(true);
+    const explainBundle = {
+      selectedProblem: dssBundle.selectedProblem,
+      criteria: dssBundle.criteria,
+      recommendedSolution: dssBundle.recommendedSolution,
+      feasibleCandidates: dssBundle.feasibleCandidates,
+      infeasibleCandidates: dssBundle.infeasibleCandidates,
+    };
+    if (isStandaloneRuntime()) {
+      setAiExplain(buildDeterministicMcdaExplanation(explainBundle, language));
+      setAiLoading(false);
+      return;
+    }
     try {
       const res = await fetch('/api/dss/explain', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           language,
-          bundle: {
-            selectedProblem: dssBundle.selectedProblem,
-            criteria: dssBundle.criteria,
-            recommendedSolution: dssBundle.recommendedSolution,
-            feasibleCandidates: dssBundle.feasibleCandidates,
-            infeasibleCandidates: dssBundle.infeasibleCandidates,
-          },
+          bundle: explainBundle,
         }),
       });
       if (res.ok) {
         const data = (await res.json()) as McdaGeminiExplanationResponse;
         setAiExplain(data);
+      } else {
+        setAiExplain(buildDeterministicMcdaExplanation(explainBundle, language));
       }
     } catch {
-      // keep existing UI intact
+      setAiExplain(buildDeterministicMcdaExplanation(explainBundle, language));
     } finally {
       setAiLoading(false);
     }

@@ -726,6 +726,7 @@
     "inputPlaceholder": "Ask about detected problems, root causes, or mitigations...",
     "askBtn": "Ask AI",
     "healthNoKeyNotice": "Gemini API secret is not configured in the server runtime; rule-based Problem Analyzer is active.",
+    "standaloneOfflineNotice": "Standalone offline HTML mode: local deterministic 6-module Problem Analyzer is active (live Gemini cloud API requires a backend server and API key).",
     "httpErrorPrefix": "Problem Analyzer service returned HTTP {status}",
     "localFallbackSuffix": "Serving deterministic local Problem Analyzer.",
     "backendUnreachableFallback": "Unable to reach assistant backend. Serving deterministic local Problem Analyzer.",

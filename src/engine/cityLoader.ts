@@ -25,8 +25,59 @@ export interface ChatuchakDatasets {
   railways: GeoJSONCollection;
 }
 
+type EmbeddedGeoJSONEntry =
+  | GeoJSONCollection
+  | { encoding: 'gzip-base64'; data: string };
+
+declare global {
+  interface Window {
+    __FLOODGUARD_STANDALONE__?: boolean;
+    __FLOODGUARD_EMBEDDED_DATASETS__?: Record<string, EmbeddedGeoJSONEntry>;
+  }
+}
+
+async function decodeEmbeddedGeoJSON(
+  file: string,
+  entry: EmbeddedGeoJSONEntry
+): Promise<GeoJSONCollection> {
+  if ('features' in entry && Array.isArray(entry.features)) {
+    return {
+      type: 'FeatureCollection',
+      features: entry.features,
+    };
+  }
+  if ('encoding' in entry && entry.encoding === 'gzip-base64' && typeof entry.data === 'string') {
+    const binary = window.atob(entry.data);
+    const bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i++) {
+      bytes[i] = binary.charCodeAt(i);
+    }
+    if (typeof DecompressionStream !== 'undefined') {
+      const stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
+      const data = (await new Response(stream).json()) as Partial<GeoJSONCollection> | null;
+      if (!data || !Array.isArray(data.features)) {
+        throw new Error(`Invalid embedded GeoJSON dataset: ${file}`);
+      }
+      return {
+        type: 'FeatureCollection',
+        features: data.features,
+      };
+    }
+    throw new Error(
+      `Browser lacks DecompressionStream('gzip') required to decode embedded ${file}. Please open in modern Chrome or Edge.`
+    );
+  }
+  throw new Error(`Unsupported embedded GeoJSON payload format: ${file}`);
+}
+
 async function fetchGeoJSON(file: string): Promise<GeoJSONCollection> {
-  const base = (import.meta as { env?: { BASE_URL?: string } }).env?.BASE_URL || '/';
+  if (typeof window !== 'undefined' && window.__FLOODGUARD_EMBEDDED_DATASETS__?.[file]) {
+    return decodeEmbeddedGeoJSON(file, window.__FLOODGUARD_EMBEDDED_DATASETS__[file]);
+  }
+  const base =
+    typeof import.meta !== 'undefined' && (import.meta as { env?: { BASE_URL?: string } }).env?.BASE_URL
+      ? (import.meta as { env?: { BASE_URL?: string } }).env!.BASE_URL!
+      : '/';
   const normalizedBase = base.endsWith('/') ? base : `${base}/`;
   const res = await fetch(`${normalizedBase}data/${file}`);
   if (!res.ok) {

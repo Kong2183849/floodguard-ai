@@ -18,6 +18,10 @@ import {
   Zap,
 } from 'lucide-react';
 import { useSimulation } from '../context/SimulationContext';
+import {
+  buildDeterministicMcdaExplanation,
+  isStandaloneRuntime,
+} from '../engine/mcdaExplanation';
 import { useTranslation } from '../i18n';
 import type {
   DssProblemRecord,
@@ -83,6 +87,11 @@ export function DecisionSupportPanel() {
 
   const handleRequestAiCauseAnalysis = async () => {
     setAiLoading(true);
+    if (isStandaloneRuntime()) {
+      setAiExplain(buildDeterministicMcdaExplanation(dssBundle, language));
+      setAiLoading(false);
+      return;
+    }
     try {
       const res = await fetch('/api/dss/explain', {
         method: 'POST',
@@ -95,9 +104,11 @@ export function DecisionSupportPanel() {
       if (res.ok) {
         const data = (await res.json()) as McdaGeminiExplanationResponse;
         setAiExplain(data);
+      } else {
+        setAiExplain(buildDeterministicMcdaExplanation(dssBundle, language));
       }
     } catch {
-      // Keep UI resilient even if network request fails
+      setAiExplain(buildDeterministicMcdaExplanation(dssBundle, language));
     } finally {
       setAiLoading(false);
     }
