@@ -51,7 +51,7 @@ export function TopNavbar({ leftWidthPct, onResetSplit }: TopNavbarProps) {
             <ShieldAlert className="w-4 h-4" />
           </div>
           <span className="text-sm sm:text-base font-bold tracking-tight text-[#172033] dark:text-slate-50">
-            FloodGuard AI
+            Smart City 3D
           </span>
         </div>
 

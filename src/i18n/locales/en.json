@@ -60,7 +60,7 @@
     "parks": "Parks"
   },
   "meta": {
-    "pageTitle": "FloodGuard AI — AI-Powered Smart Flood Management & Decision Support System"
+    "pageTitle": "Smart City 3D"
   },
   "header": {
     "districtSubtitle": "Chatuchak District · Smart Flood Management & Decision Support",
@@ -94,7 +94,7 @@
   },
   "nav": {
     "panelAria": "Command Modules Panel",
-    "heading": "FloodGuard AI Workspace",
+    "heading": "Smart City 3D Workspace",
     "groupCommandHeading": "Command Modules",
     "groupCommandDesc": "Operations, monitoring & route control",
     "groupAiHeading": "AI Analysis",
@@ -156,7 +156,7 @@
     "webglLostTitle": "WebGL Rendering Context Paused",
     "webglLostDesc": "The browser suspended GPU resources for this viewport. Reload the 3D scene to restore rendering.",
     "reload3d": "Reload 3D Viewport",
-    "loadingTitle": "FloodGuard AI · Loading Chatuchak 3D Flood Environment",
+    "loadingTitle": "Smart City 3D · Loading Chatuchak 3D Flood Environment",
     "loadingDesc": "Parsing GeoJSON buildings, roads, canals, and rail transit layers...",
     "errorTitle": "Unable to Load Chatuchak 3D Datasets",
     "retryLoad": "Retry Load"
@@ -688,7 +688,7 @@
     }
   },
   "assistant": {
-    "title": "FloodGuard AI Problem Analyzer",
+    "title": "Smart City 3D Problem Analyzer",
     "ruleEngineMode": "Deterministic Rule Engine",
     "geminiMode": "Gemini Structured Analyzer",
     "activeIssues": "{count} active issue",
@@ -700,7 +700,7 @@
     "filteringBanner": "Filtering problem cards: {domain}",
     "showAllModules": "Show All 6 Modules",
     "operatorQuery": "Operator Query",
-    "reportTitle": "FloodGuard AI Problem Report",
+    "reportTitle": "Smart City 3D Problem Report",
     "stampRuleEngine": "Rule Engine · ",
     "stampGemini": "Gemini · ",
     "stampLiveScan": "Live Scan · ",

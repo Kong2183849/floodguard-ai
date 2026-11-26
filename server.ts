@@ -18,7 +18,7 @@ const __dirname = path.dirname(__filename);
 const PORT = Number(process.env.PORT || 3000);
 const MODEL_NAME = 'gemini-4-hydrogen';
 
-const SYSTEM_INSTRUCTION = `You are the FloodGuard AI Problem Analyzer for Chatuchak District (Bangkok).
+const SYSTEM_INSTRUCTION = `You are the Smart City 3D Problem Analyzer for Chatuchak District (Bangkok).
 Review the deterministic 6-module scan (Traffic, Flood, Water, Power, Routing, Analytics) and SIMULATION_CONTEXT.
 
 RULES:
@@ -539,7 +539,7 @@ async function createApp() {
     }
 
     const sysInstruction = [
-      'You are the FloodGuard AI Decision Explanation Module for Chatuchak District.',
+      'You are the Smart City 3D Decision Explanation Module for Chatuchak District.',
       'CRITICAL RULES:',
       '1. You MUST NOT invent, modify, re-weight, or override any MCDA numeric scores, ranks, constraint pass/fail status, or simulation metrics.',
       '2. Clearly explain WHY the #1 feasible solution ranked highest using the exact scores and normalized weights provided, compare trade-offs with #2, and cite exact constraint rejections for infeasible solutions.',
@@ -681,11 +681,11 @@ async function createApp() {
   }
 
   app.listen(PORT, '0.0.0.0', () => {
-    console.log(`FloodGuard AI server listening on http://0.0.0.0:${PORT}`);
+    console.log(`Smart City 3D server listening on http://0.0.0.0:${PORT}`);
   });
 }
 
 createApp().catch((err) => {
-  console.error('Failed to start FloodGuard AI server:', err);
+  console.error('Failed to start Smart City 3D server:', err);
   process.exit(1);
 });

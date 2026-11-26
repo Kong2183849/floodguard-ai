@@ -47,8 +47,8 @@ export interface McdaExplanationBundleInput {
 
 export function isStandaloneRuntime(): boolean {
   if (typeof window === 'undefined') return false;
-  const win = window as unknown as { __FLOODGUARD_STANDALONE__?: boolean };
-  return window.location.protocol === 'file:' || Boolean(win.__FLOODGUARD_STANDALONE__);
+  const win = window as unknown as { __SMART_CITY_3D_STANDALONE__?: boolean };
+  return window.location.protocol === 'file:' || Boolean(win.__SMART_CITY_3D_STANDALONE__);
 }
 
 export function buildDeterministicMcdaExplanation(

@@ -60,7 +60,7 @@
     "parks": "สวนสาธารณะ"
   },
   "meta": {
-    "pageTitle": "FloodGuard AI — ระบบบริหารจัดการและวิเคราะห์สถานการณ์น้ำท่วมอัจฉริยะ"
+    "pageTitle": "Smart City 3D"
   },
   "header": {
     "districtSubtitle": "เขตจตุจักร · ระบบบริหารจัดการและวิเคราะห์สถานการณ์น้ำท่วมอัจฉริยะ",
@@ -94,7 +94,7 @@
   },
   "nav": {
     "panelAria": "แผงโมดูลคำสั่งและวิเคราะห์",
-    "heading": "พื้นที่ทำงาน FloodGuard AI",
+    "heading": "พื้นที่ทำงาน Smart City 3D",
     "groupCommandHeading": "โมดูลสั่งการ",
     "groupCommandDesc": "ควบคุมการจำลอง เฝ้าระวัง และโครงสร้างพื้นฐาน",
     "groupAiHeading": "การวิเคราะห์ด้วย AI",
@@ -156,7 +156,7 @@
     "webglLostTitle": "การแสดงผล WebGL ถูกหยุดชั่วคราว",
     "webglLostDesc": "เบราว์เซอร์ได้ระงับทรัพยากร GPU สำหรับมุมมองนี้ กดโหลดฉาก 3 มิติใหม่เพื่อคืนค่าการแสดงผล",
     "reload3d": "โหลดมุมมอง 3 มิติใหม่",
-    "loadingTitle": "FloodGuard AI · กำลังโหลดสภาพแวดล้อมเมือง 3 มิติ เขตจตุจักร",
+    "loadingTitle": "Smart City 3D · กำลังโหลดสภาพแวดล้อมเมือง 3 มิติ เขตจตุจักร",
     "loadingDesc": "กำลังประมวลผลข้อมูล GeoJSON อาคาร ถนน คลอง และระบบราง...",
     "errorTitle": "ไม่สามารถโหลดชุดข้อมูล 3 มิติ เขตจตุจักรได้",
     "retryLoad": "ลองโหลดใหม่"
@@ -688,7 +688,7 @@
     }
   },
   "assistant": {
-    "title": "ระบบวิเคราะห์ปัญหาน้ำท่วม FloodGuard AI",
+    "title": "ระบบวิเคราะห์ปัญหาน้ำท่วม Smart City 3D",
     "ruleEngineMode": "เครื่องมือวิเคราะห์กฎเกณฑ์",
     "geminiMode": "ผู้ช่วยวิเคราะห์โครงสร้าง Gemini",
     "activeIssues": "พบ {count} ปัญหาที่ต้องเฝ้าระวัง",
@@ -700,7 +700,7 @@
     "filteringBanner": "กำลังกรองการ์ดปัญหา: {domain}",
     "showAllModules": "แสดงทั้ง 6 โมดูล",
     "operatorQuery": "คำถามผู้ปฏิบัติงาน",
-    "reportTitle": "รายงานวิเคราะห์ปัญหา FloodGuard AI",
+    "reportTitle": "รายงานวิเคราะห์ปัญหา Smart City 3D",
     "stampRuleEngine": "กฎเกณฑ์วิเคราะห์ · ",
     "stampGemini": "Gemini · ",
     "stampLiveScan": "สแกนสด · ",

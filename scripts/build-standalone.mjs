@@ -11,7 +11,7 @@ const __dirname = path.dirname(__filename);
 const ROOT_DIR = path.resolve(__dirname, '..');
 const PUBLIC_DATA_DIR = path.join(ROOT_DIR, 'public', 'data');
 const TMP_OUT_DIR = path.join(ROOT_DIR, '.tmp-standalone-build');
-const OUTPUT_HTML = path.join(ROOT_DIR, 'FloodGuard_AI.html');
+const OUTPUT_HTML = path.join(ROOT_DIR, 'Smart_City_3D.html');
 
 const GEOJSON_FILES = [
   'boundary.geojson',
@@ -98,7 +98,7 @@ async function run() {
         input: path.join(ROOT_DIR, 'src', 'main.tsx'),
         output: {
           format: 'iife',
-          name: 'FloodGuardAIApp',
+          name: 'SmartCity3DApp',
           codeSplitting: false,
           entryFileNames: 'bundle.js',
           assetFileNames: 'bundle.[ext]',
@@ -135,14 +135,14 @@ async function run() {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FloodGuard AI — AI-Powered Smart Flood Management &amp; Decision Support System</title>
+    <title>Smart City 3D</title>
     <meta
       name="description"
-      content="FloodGuard AI — Standalone Offline Smart Flood Management, Chatuchak 3D Urban Infrastructure Simulation, and Intelligent Route Optimization."
+      content="Smart City 3D — Standalone Offline Smart Flood Management, Chatuchak 3D Urban Infrastructure Simulation, and Intelligent Route Optimization."
     />
     <script>
       (function () {
-        window.__FLOODGUARD_STANDALONE__ = true;
+        window.__SMART_CITY_3D_STANDALONE__ = true;
         try {
           var stored = window.localStorage.getItem('urbanguard-theme');
           var mode = stored === 'light' ? 'light' : 'dark';
@@ -161,7 +161,7 @@ ${offlineFontOverrideCss}
   <body class="bg-[#F4F7FB] text-[#172033] dark:bg-[#060b14] dark:text-slate-100 antialiased selection:bg-cyan-500/25 selection:text-cyan-950 dark:selection:text-cyan-100">
     <div id="root"></div>
     <script>
-      window.__FLOODGUARD_EMBEDDED_DATASETS__ = ${escapeInlineScript(JSON.stringify(embeddedDatasets))};
+      window.__SMART_CITY_3D_EMBEDDED_DATASETS__ = ${escapeInlineScript(JSON.stringify(embeddedDatasets))};
     </script>
     <script>
 ${escapeInlineScript(jsCode)}

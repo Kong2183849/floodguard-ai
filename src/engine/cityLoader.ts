@@ -31,8 +31,8 @@ type EmbeddedGeoJSONEntry =
 
 declare global {
   interface Window {
-    __FLOODGUARD_STANDALONE__?: boolean;
-    __FLOODGUARD_EMBEDDED_DATASETS__?: Record<string, EmbeddedGeoJSONEntry>;
+    __SMART_CITY_3D_STANDALONE__?: boolean;
+    __SMART_CITY_3D_EMBEDDED_DATASETS__?: Record<string, EmbeddedGeoJSONEntry>;
   }
 }
 
@@ -71,8 +71,8 @@ async function decodeEmbeddedGeoJSON(
 }
 
 async function fetchGeoJSON(file: string): Promise<GeoJSONCollection> {
-  if (typeof window !== 'undefined' && window.__FLOODGUARD_EMBEDDED_DATASETS__?.[file]) {
-    return decodeEmbeddedGeoJSON(file, window.__FLOODGUARD_EMBEDDED_DATASETS__[file]);
+  if (typeof window !== 'undefined' && window.__SMART_CITY_3D_EMBEDDED_DATASETS__?.[file]) {
+    return decodeEmbeddedGeoJSON(file, window.__SMART_CITY_3D_EMBEDDED_DATASETS__[file]);
   }
   const base =
     typeof import.meta !== 'undefined' && (import.meta as { env?: { BASE_URL?: string } }).env?.BASE_URL
